@@ -1,10 +1,32 @@
 import sqlite3
+import sys
 from .models import *
 
 
-conn = sqlite3.connect("./data/storage.db")
-conn.row_factory = sqlite3.Row
-cur = conn.cursor()
+conn = None
+cur = None
+try:
+    conn = sqlite3.connect("./data/storage.db")
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("""CREATE TABLE IF NOT EXISTS entries (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    type TEXT NOT NULL,
+    is_completed INTEGER,
+    due_date TEXT,
+    priority TEXT,
+    url TEXT,
+    source TEXT
+    )
+    """)
+    conn.commit()
+except sqlite3.OperationalError as e:
+    sys.exit(e)
+
 
 def recordToEntry(row):
     if row["type"] == "note":
@@ -15,15 +37,56 @@ def recordToEntry(row):
             created_at=row["created_at"],
             updated_at=row["updated_at"]
         )
+    elif row["type"] == "task":
+        return TaskEntry(
+            id=row["id"],
+            title=row["title"],
+            content=row["content"],
+            created_at=row["created_at"],
+            updated_at=row["updated_at"],
+            is_completed=row["is_completed"],
+            due_date=row["due_date"],
+            priority=row["priority"]
+        )
+    elif row["type"] == "bookmark":
+        return BookmarkEntry(
+            id=row["id"],
+            title=row["title"],
+            content=row["content"],
+            created_at=row["created_at"],
+            updated_at=row["updated_at"],
+            url=row["url"],
+            source=row["source"]
+        )
     else:
-        pass # Implement task and bookmark when I get back here
+        pass
+
+
+def recordToDatabase(entry):
+    try:
+        if entry.type == "note":
+            cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type) VALUES (?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type))
+            conn.commit()
+        elif entry.type == "task":
+            cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type, is_completed, due_date, priority) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type , entry.is_completed, entry.due_date, entry.priority))
+            conn.commit()
+        elif entry.type == "bookmark":
+            conn.commit()
+            cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type, url, source) VALUES (?, ?, ?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type , entry.url, entry.source))
+        else:
+            pass
+    except sqlite3.OperationalError as e:
+        sys.exit(e)
+
 
 def readDatabase():
-    cur.execute("SELECT * FROM entries")
-    rows = cur.fetchall()
-    entries = []
-    for row in rows:
-        entry = recordToEntry(row)
-        entries.append(entry)
-    return entries
-        
+    try:
+        cur.execute("SELECT * FROM entries")
+        rows = cur.fetchall()
+        entries = []
+        for row in rows:
+            entry = recordToEntry(row)
+            entries.append(entry)
+        return entries
+    except sqlite3.OperationalError as e:
+        sys.exit(e)
