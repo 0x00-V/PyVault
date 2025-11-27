@@ -67,12 +67,15 @@ def recordToDatabase(entry):
         if entry.type == "note":
             cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type) VALUES (?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type))
             conn.commit()
+            entry.id = cur.lastrowid
         elif entry.type == "task":
             cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type, is_completed, due_date, priority) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type , entry.is_completed, entry.due_date, entry.priority))
             conn.commit()
+            entry.id = cur.lastrowid
         elif entry.type == "bookmark":
-            conn.commit()
             cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type, url, source) VALUES (?, ?, ?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type , entry.url, entry.source))
+            conn.commit()
+            entry.id = cur.lastrowid
         else:
             pass
     except sqlite3.OperationalError as e:
