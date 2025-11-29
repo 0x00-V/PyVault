@@ -35,12 +35,12 @@ def notesMenu():
                 system("clear||cls")
             case "3":
                 system("clear||cls")
-                print("Will be impolemented next.")
+                print("Will be implemented next.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
                 system("clear||cls")
-                print("Will be impolemented next.")
+                print("Will be implemented next.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
@@ -88,12 +88,12 @@ def tasksMenu():
                 system("clear||cls")
             case "3":
                 system("clear||cls")
-                print("Will be impolemented next.")
+                print("Will be implemented next.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
                 system("clear||cls")
-                print("Will be impolemented next.")
+                print("Will be implemented next.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
@@ -140,12 +140,12 @@ def bookmarksMenu():
                 system("clear||cls")
             case "3":
                 system("clear||cls")
-                print("Will be impolemented next.")
+                print("Will be implemented next.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
                 system("clear||cls")
-                print("Will be impolemented next.")
+                print("Will be implemented next.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
