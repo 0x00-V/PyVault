@@ -188,5 +188,3 @@ def mainMenu():
             case _:
                 system("clear||cls")
                 print("!!!---Invalid input---!!!")
-
-mainMenu()
