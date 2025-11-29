@@ -19,8 +19,7 @@ try:
     is_completed INTEGER,
     due_date TEXT,
     priority TEXT,
-    url TEXT,
-    source TEXT
+    url TEXT
     )
     """)
     conn.commit()
@@ -55,8 +54,7 @@ def recordToEntry(row):
             content=row["content"],
             created_at=row["created_at"],
             updated_at=row["updated_at"],
-            url=row["url"],
-            source=row["source"]
+            url=row["url"]
         )
     else:
         pass
@@ -73,7 +71,7 @@ def recordToDatabase(entry):
             conn.commit()
             entry.id = cur.lastrowid
         elif entry.type == "bookmark":
-            cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type, url, source) VALUES (?, ?, ?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type , entry.url, entry.source))
+            cur.execute("""INSERT INTO entries (title, content, created_at, updated_at, type, url) VALUES (?, ?, ?, ?, ?, ?)""", (entry.title, entry.content, entry.created_at, entry.updated_at, entry.type , entry.url))
             conn.commit()
             entry.id = cur.lastrowid
         else:

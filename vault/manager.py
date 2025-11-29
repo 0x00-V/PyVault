@@ -35,15 +35,14 @@ class Manager:
         self.entries.append(task)
         recordToDatabase(task)
     
-    def add_bookmark(self, title, content, url, source):
+    def add_bookmark(self, title, content, url):
         bookmark = BookmarkEntry(
             id = None,
             title = title,
             content = content,
             created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             updated_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            url = url, 
-            source = source
+            url = url
         )
         self.entries.append(bookmark)
         recordToDatabase(bookmark)
@@ -52,3 +51,11 @@ class Manager:
         for entry in self.entries:
             if entry.id == id:
                 return entry
+    
+    def get_entries_by_category(self, category):
+        entries_by_cat = []
+        for entry in self.entries:
+            if entry.type == category:
+                entries_by_cat.append(entry)
+        return entries_by_cat
+                

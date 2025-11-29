@@ -23,8 +23,7 @@ class TaskEntry(BaseModel):
 
 
 class BookmarkEntry(BaseModel):
-    def __init__(self, id, title, content, created_at, updated_at, url, source):
+    def __init__(self, id, title, content, created_at, updated_at, url):
         BaseModel.__init__(self, id, title, content, created_at, updated_at)
         self.url = url
-        self.source = source
         self.type = "bookmark"

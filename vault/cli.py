@@ -1,5 +1,7 @@
 from os import system
 import sys
+from .manager import *
+
 
 def notesMenu():
     system("clear||cls")
@@ -16,16 +18,30 @@ def notesMenu():
 
         match userInput:
             case "1":
-                pass
+                system("clear||cls")
+                entries = manager.get_entries_by_category("note")
+                for entry in entries:
+                    print(f"ID: {entry.id} | Created At: {entry.created_at} | Title: {entry.title} | Content: {entry.content}")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "2":
-                pass
+                system("clear||cls")
+                title = input("Title: ")
+                content = input("Content:")
+                manager.add_note(title=title, content=content)
+                system("clear||cls")
+                print(f"Note added.\n\nTitle: {title}\nContent: {content}")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "3":
-                pass
+                system("clear||cls")
+                print("Will be impolemented next.")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
-                pass
+                system("clear||cls")
+                print("Will be impolemented next.")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
                 break
@@ -53,16 +69,32 @@ def tasksMenu():
 
         match userInput:
             case "1":
-                pass
+                system("clear||cls")
+                entries = manager.get_entries_by_category("task")
+                for entry in entries:
+                    print(f"ID: {entry.id} | Title: {entry.title} | Created At: {entry.created_at} | Content: {entry.content} | Completed: {entry.is_completed} | Due Date: {entry.due_date} | Priority: {entry.priority}")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "2":
-                pass
+                system("clear||cls")
+                title = input("Title: ")
+                content = input("Content:")
+                due_date = input("Due Date: ")
+                priority = input("Priority: ")
+                manager.add_task(title=title, content=content, is_completed=0, due_date=due_date, priority=priority)
+                system("clear||cls")
+                print(f"Task added.\n\nTitle: {title}\nContent: {content}\nDue Date: {due_date}\nPriority: {priority}")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "3":
-                pass
+                system("clear||cls")
+                print("Will be impolemented next.")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
-                pass
+                system("clear||cls")
+                print("Will be impolemented next.")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
                 break
@@ -90,16 +122,31 @@ def bookmarksMenu():
 
         match userInput:
             case "1":
-                pass
+                system("clear||cls")
+                entries = manager.get_entries_by_category("bookmark")
+                for entry in entries:
+                    print(f"ID: {entry.id} | Title: {entry.title} | Content: {entry.content} | Created At: {entry.created_at} | URL: {entry.url}")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "2":
-                pass
+                system("clear||cls")
+                title = input("Title: ")
+                content = input("Content:")
+                url = input("URL: ")
+                manager.add_bookmark(title=title, content=content, url=url)
+                system("clear||cls")
+                print(f"Bookmark added.\n\nTitle: {title}\nContent: {content}\nURL: {url}")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "3":
-                pass
+                system("clear||cls")
+                print("Will be impolemented next.")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
-                pass
+                system("clear||cls")
+                print("Will be impolemented next.")
+                input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
                 break
@@ -112,6 +159,7 @@ def bookmarksMenu():
                 print("!!!---Invalid input---!!!")
 
 
+manager = Manager()
 def mainMenu():
     system("clear||cls")
     while True:
