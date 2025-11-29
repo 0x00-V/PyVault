@@ -1,2 +1,2 @@
 ### Usage:
-`python -m vault`
+```python -m vault```
