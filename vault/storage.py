@@ -79,6 +79,12 @@ def recordToDatabase(entry):
     except sqlite3.OperationalError as e:
         sys.exit(e)
 
+def deleteEntry(entry_id):
+    try:
+        cur.execute("""DELETE FROM entries WHERE id = ?""", (entry_id,))
+        conn.commit()
+    except sqlite3.OperationalError as e:
+        sys.exit(e)
 
 def readDatabase():
     try:

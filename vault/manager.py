@@ -47,6 +47,14 @@ class Manager:
         self.entries.append(bookmark)
         recordToDatabase(bookmark)
 
+    def delete_entry(self, id):
+        for entry in self.entries:
+            if entry.id == id:
+                deleteEntry(id)
+                self.entries.remove(entry)
+                return "OK."
+        return "Not Found."
+
     def get_entry_by_id(self, id):
         for entry in self.entries:
             if entry.id == id:

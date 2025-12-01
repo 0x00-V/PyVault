@@ -40,7 +40,12 @@ def notesMenu():
                 system("clear||cls")
             case "4":
                 system("clear||cls")
-                print("Will be implemented next.")
+                entry_id = input("Enter the entry id: (Or type 'x' to cancel): ")
+                try:
+                    if entry_id != "x":
+                        print(manager.delete_entry(int(entry_id)))
+                except:
+                    print("Invalid ID.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
@@ -93,7 +98,12 @@ def tasksMenu():
                 system("clear||cls")
             case "4":
                 system("clear||cls")
-                print("Will be implemented next.")
+                entry_id = input("Enter the entry id: (Or type 'x' to cancel): ")
+                try:
+                    if entry_id != "x":
+                        print(manager.delete_entry(int(entry_id)))
+                except:
+                    print("Invalid ID.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
@@ -145,7 +155,12 @@ def bookmarksMenu():
                 system("clear||cls")
             case "4":
                 system("clear||cls")
-                print("Will be implemented next.")
+                entry_id = input("Enter the entry id: (Or type 'x' to cancel): ")
+                try:
+                    if entry_id != "x":
+                        print(manager.delete_entry(int(entry_id)))
+                except:
+                    print("Invalid ID.")
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "5":
