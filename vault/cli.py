@@ -35,11 +35,10 @@ def notesMenu():
                 system("clear||cls")
             case "3":
                 system("clear||cls")
-                # Kinda janky, will fix
                 id = int(input("Enter the ID of the note you'd like to edit: "))
                 title = input("Enter a new title, or leave blank to leave unchanged: ")
                 content = input("Enter new content, or leave blank to leave unchanged:")
-                manager.edit_entry(id, title, content)
+                print(manager.edit_entry("note" , id, title, content, "", "", ""))
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
@@ -97,7 +96,12 @@ def tasksMenu():
                 system("clear||cls")
             case "3":
                 system("clear||cls")
-                print("Will be implemented next.")
+                id = int(input("Enter the ID of the task you'd like to edit: "))
+                title = input("Enter a new title, or leave blank to leave unchanged: ")
+                content = input("Enter new content, or leave blank to leave unchanged:")
+                due_date = input("Enter new due date, or leave blank to leave unchanged: ")
+                priority = input("Enter new priority, or leave blank to leave unchanged: ")
+                print(manager.edit_entry("task" ,id, title, content, due_date, priority, ""))
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":
@@ -154,7 +158,11 @@ def bookmarksMenu():
                 system("clear||cls")
             case "3":
                 system("clear||cls")
-                print("Will be implemented next.")
+                id = int(input("Enter the ID of the bookmark you'd like to edit: "))
+                title = input("Enter a new title, or leave blank to leave unchanged: ")
+                content = input("Enter new content, or leave blank to leave unchanged:")
+                url = input("Enter new url, or leave blank to leave unchanged: ")
+                print(manager.edit_entry("bookmark", id, title, content, "", "", url))
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":

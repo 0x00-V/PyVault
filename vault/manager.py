@@ -55,11 +55,11 @@ class Manager:
                 return "Entry Deleted."
         return "Not Found."
     
-    def edit_entry(self, id, new_title="", new_content="", new_due_date="", new_priority="", new_url=""):
+    def edit_entry(self, type, id, new_title="", new_content="", new_due_date="", new_priority="", new_url=""):
         for entry in self.entries:
             if entry.id == id:
                 new_updated_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                if entry.type == "note":
+                if entry.type == "note" and type == "note":
                     if new_title == "":
                         new_title = entry.title
                     if new_content == "":
@@ -68,7 +68,7 @@ class Manager:
                     entry.title = new_title
                     entry.content = new_content
                     entry.updated_at = new_updated_at
-                elif entry.type == "task":
+                elif entry.type == "task" and type == "task":
                     if new_title == "":
                         new_title = entry.title
                     if new_content == "":
@@ -83,7 +83,7 @@ class Manager:
                     entry.updated_at = new_updated_at
                     entry.due_date = new_due_date
                     entry.priority = new_priority
-                elif entry.type == "bookmark":
+                elif entry.type == "bookmark" and type == "bookmark":
                     if new_title == "":
                         new_title = entry.title
                     if new_content == "":
@@ -96,8 +96,9 @@ class Manager:
                     entry.updated_at = new_updated_at
                     entry.url = new_url
                 else:
-                    pass
+                    return "This entry is appart of another category."
                 return "Entry updated."
+
         return "Entry not found."
         
                 
