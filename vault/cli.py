@@ -35,7 +35,11 @@ def notesMenu():
                 system("clear||cls")
             case "3":
                 system("clear||cls")
-                print("Will be implemented next.")
+                # Kinda janky, will fix
+                id = int(input("Enter the ID of the note you'd like to edit: "))
+                title = input("Enter a new title, or leave blank to leave unchanged: ")
+                content = input("Enter new content, or leave blank to leave unchanged:")
+                manager.edit_entry(id, title, content)
                 input("\n------------------------\nPress Enter to continue\n------------------------\n")
                 system("clear||cls")
             case "4":

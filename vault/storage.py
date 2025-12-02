@@ -86,6 +86,25 @@ def deleteEntry(entry_id):
     except sqlite3.OperationalError as e:
         sys.exit(e)
 
+def editEntry(entry, new_title, new_content, new_updated_at, new_due_date, new_priority, new_url):
+    try:
+        if entry.type == "note":
+            cur.execute("""UPDATE entries SET title = ?, content = ?, updated_at = ? WHERE id = ?""", (new_title, new_content, new_updated_at, entry.id))
+            conn.commit()
+        elif entry.type == "task":
+            cur.execute("""UPDATE entries SET title = ?, content = ?, updated_at = ?, due_date = ?, priority = ? WHERE id = ?""", (new_title, new_content, new_updated_at, new_due_date, new_priority, entry.id))
+            conn.commit()
+        elif entry.type == "bookmark":
+            cur.execute("""UPDATE entries SET title = ?, content = ?, updated_at = ?, url = ? WHERE id = ?""", (new_title, new_content, new_updated_at, new_url, entry.id))
+            conn.commit()
+        else:
+            pass
+    except sqlite3.OperationalError as e:
+        sys.exit(e)        
+
+
+
+
 def readDatabase():
     try:
         cur.execute("SELECT * FROM entries")
